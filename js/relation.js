@@ -388,8 +388,10 @@
     window.nameHash = {};
     window.linkHash = {};
     $('#loading').fadeIn(100);
+
     mpl = new Firebase("https://ppllink.firebaseio.com/" + domain);
     return mpl.on('value', function(s){
+console.log( 12345, s)
       var _d, data, k, ref$, v;
       reloadWorkaround = reloadWorkaround + 1;
       _d = s.val();
@@ -421,7 +423,8 @@
       }
       window.relationData = data;
       updateSelect(data);
-      window.updateRelations(data);
+      console.log( 44, data)
+      //window.updateRelations(data);
       return $('#loading').fadeOut(400);
     });
   };
@@ -534,30 +537,30 @@
     mpl.child('img').child(val).set(headPayload);
     return window.relationData.img[val] = headPayload;
   };
-  headIconSelect = function(evt){
-    var f, reader;
-    f = evt.target.files[0];
-    reader = new FileReader();
-    reader.onload = function(e){
-      var fsize;
-      fsize = e.total > 1000000
-        ? parseInt(e.total / 1000000) + "MB"
-        : parseInt(e.total / 1000) + "KB";
-      $('#head-icon-size').text("檔案大小: " + fsize);
-      if (e.total < 100000) {
-        headPayload = e.target.result;
-        document.getElementById('upload-preview').src = headPayload;
-        $('#head-icon-size').css('color', '#000');
-        return $('#head-upload-btn').removeClass('disabled').addClass('btn-primary').prop('disabled', false);
-      } else {
-        $('#head-icon-size').css('color', '#900');
-        return $('#head-upload-btn').addClass('disabled').removeClass('btn-primary').prop('disabled', true);
-      }
-    };
-    return reader.readAsDataURL(f);
-  };
-  fu = document.getElementById('head-upload');
-  fu.addEventListener('change', headIconSelect, false);
+  // headIconSelect = function(evt){
+  //   var f, reader;
+  //   f = evt.target.files[0];
+  //   reader = new FileReader();
+  //   reader.onload = function(e){
+  //     var fsize;
+  //     fsize = e.total > 1000000
+  //       ? parseInt(e.total / 1000000) + "MB"
+  //       : parseInt(e.total / 1000) + "KB";
+  //     $('#head-icon-size').text("檔案大小: " + fsize);
+  //     if (e.total < 100000) {
+  //       headPayload = e.target.result;
+  //       document.getElementById('upload-preview').src = headPayload;
+  //       $('#head-icon-size').css('color', '#000');
+  //       return $('#head-upload-btn').removeClass('disabled').addClass('btn-primary').prop('disabled', false);
+  //     } else {
+  //       $('#head-icon-size').css('color', '#900');
+  //       return $('#head-upload-btn').addClass('disabled').removeClass('btn-primary').prop('disabled', true);
+  //     }
+  //   };
+  //   return reader.readAsDataURL(f);
+  // };
+  // fu = document.getElementById('head-upload');
+  // fu.addEventListener('change', headIconSelect, false);
   this.setIcon = function(name){
     if (name) {
       headName = name;

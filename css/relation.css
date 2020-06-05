@@ -45,7 +45,7 @@ a.toggles {
   height: 100%;
   margin: 0;
   /* background: url(../img/loading.gif?yx) rgba(0,0,0,0.5) no-repeat center center; */
-  /* display: none; */
+  display: none;
 }
 
 .icon-large-adduser, .icon-large-girl {
